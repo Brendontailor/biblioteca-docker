@@ -1,0 +1,33 @@
+# Evita copiar dependencias locais (serao instaladas dentro da imagem)
+node_modules
+
+# Arquivos de configuracao local e segredos
+.env
+.env.*
+!.env.example
+
+# Controle de versao e metadados
+.git
+.gitignore
+
+# Documentacao e arquivos da propria tarefa (nao sao necessarios na imagem)
+README.md
+Dockerfile
+.dockerignore
+compose.yaml
+APRESENTACAO.md
+APRESENTACAO-SLIDES.html
+PROMPT-PARA-GPT.md
+ESTADO-CONTINUIDADE.md
+evidencias.txt
+
+# Evidencias de midia (nao fazem parte da aplicacao)
+*.mp4
+*.png
+*.jpg
+
+# Logs e arquivos temporarios
+npm-debug.log*
+*.log
+.DS_Store
+tmp

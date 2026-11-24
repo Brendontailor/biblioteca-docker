@@ -1,0 +1,33 @@
+{
+  "title": "Biblioteca Comunitária",
+  "subtitle": "Cadastre e administre livros disponíveis na biblioteca.",
+  "table": "livros",
+  "icon": "📚",
+  "color": "#7c3aed",
+  "fields": [
+    {
+      "name": "titulo",
+      "label": "Título",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "autor",
+      "label": "Autor",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "genero",
+      "label": "Gênero",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "ano",
+      "label": "Ano de publicação",
+      "type": "integer",
+      "required": true
+    }
+  ]
+}

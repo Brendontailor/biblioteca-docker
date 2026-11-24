@@ -1,0 +1,48 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: biblioteca-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: laboratorio
+      POSTGRES_USER: appuser
+      POSTGRES_PASSWORD: senha123
+    volumes:
+      # Volume nomeado: persiste os dados mesmo apos remover/recriar o container
+      - pgdata:/var/lib/postgresql/data
+      # Script inicial executado apenas quando o diretorio de dados esta vazio
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - biblioteca-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U appuser -d laboratorio"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  app:
+    build: .
+    container_name: biblioteca-app
+    restart: unless-stopped
+    environment:
+      PORT: 3000
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: laboratorio
+      DB_USER: appuser
+      DB_PASSWORD: senha123
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - biblioteca-net
+
+volumes:
+  pgdata:
+
+networks:
+  biblioteca-net:
+    driver: bridge
